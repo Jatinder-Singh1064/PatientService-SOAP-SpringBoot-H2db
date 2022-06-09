@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.demo.humber.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getDoctorInfo>
+         <arg0>
+            <doctorName>doctor1</doctorName>
+         </arg0>
+      </ser:getDoctorInfo>
+   </soapenv:Body></soapenv:Envelope>

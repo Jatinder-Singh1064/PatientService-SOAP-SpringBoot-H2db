@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.demo.humber.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:createPatient>
+         <arg0>
+            <name>Jatinder</name>
+            <!--Optional:-->
+            <disease>Fever</disease>
+            <!--Optional:-->
+            <dateOfBirth>1993-07-26</dateOfBirth>
+            <doctor_id>1</doctor_id>
+         </arg0>
+      </ser:createPatient>
+   </soapenv:Body></soapenv:Envelope><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:createPatientResponse xmlns:ns2="http://service.demo.humber.com/"><return><patient><name>Jatinder</name><disease>Fever</disease><dateOfBirth>1993-07-26T00:00:00-04:00</dateOfBirth></patient></return></ns2:createPatientResponse></soap:Body></soap:Envelope>

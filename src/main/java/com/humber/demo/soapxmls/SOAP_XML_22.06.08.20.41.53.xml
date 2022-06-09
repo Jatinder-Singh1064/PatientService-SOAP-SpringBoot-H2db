@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.demo.humber.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:deletePatient>
+         <arg0>
+            <id>6</id>
+            <name>patient4</name>
+         </arg0>
+      </ser:deletePatient>
+   </soapenv:Body></soapenv:Envelope><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:deletePatientResponse xmlns:ns2="http://service.demo.humber.com/"><return><patient><name>patient4</name><disease>disease4</disease><dateOfBirth>1998-11-24T00:00:00-05:00</dateOfBirth></patient></return></ns2:deletePatientResponse></soap:Body></soap:Envelope>
