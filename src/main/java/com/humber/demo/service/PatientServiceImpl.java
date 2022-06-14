@@ -24,18 +24,17 @@ import com.humber.demo.entity.Patient;
 public class PatientServiceImpl implements PatientService {
 
 	private EntityManagerFactory entityManagerFactory;
+	private EntityManager entityManager;
 
 	public PatientServiceImpl(EntityManagerFactory entityManagerFactory) {
 		this.entityManagerFactory = entityManagerFactory;
+		this.entityManager = this.entityManagerFactory.createEntityManager();
 	}
 
 	// READ - GET
 	@Override
 	public DoctorResponse getDoctorInfo(DoctorRequest request) {
 		String name = request.getDoctorName();
-
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-
 		entityManager.getTransaction().begin();
 		Query query = entityManager.createQuery("select a from Doctor a where a.name = :name");
 		query.setParameter("name", name);
@@ -52,8 +51,6 @@ public class PatientServiceImpl implements PatientService {
 	public CreatePatientResponse createPatient(CreatePatientRequest request) {
 		Patient p = GetLatestPatientRecord();
 		int patient_id = p.getId() + 1;
-
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		entityManager.getTransaction().begin();
 		Query query = entityManager.createNativeQuery(
@@ -77,7 +74,6 @@ public class PatientServiceImpl implements PatientService {
 
 	@WebMethod(exclude = true)
 	public Patient GetLatestPatientRecord() {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		Query squery = entityManager.createQuery("select p from Patient p where p.id = (select max(id) from Patient)");
 		Patient patient = (Patient) squery.getSingleResult();
@@ -88,8 +84,6 @@ public class PatientServiceImpl implements PatientService {
 	// UPDATE - PUT
 	@Override
 	public UpdatePatientResponse updatePatient(UpdatePatientRequest request) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-
 		entityManager.getTransaction().begin();
 		Query query = entityManager.createNativeQuery(
 				"update Patient a SET a.disease = :disease, a.date_of_birth = :dob WHERE a.name = :name AND a.id = :id");
@@ -118,8 +112,6 @@ public class PatientServiceImpl implements PatientService {
 	// DELETE - DELETE
 	@Override
 	public DeletePatientResponse deletePatient(DeletePatientRequest request) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-
 		entityManager.getTransaction().begin();
 		Query squery = entityManager.createQuery("select p from Patient p where p.id = :id");
 		squery.setParameter("id", request.getId());
@@ -144,8 +136,6 @@ public class PatientServiceImpl implements PatientService {
 	}
 	
 	public PatientResponse getPatientsList() {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-
 		entityManager.getTransaction().begin();
 		Query query = entityManager.createQuery("select p from Patient p");
 		List<Patient> patientList = (List<Patient>) query.getResultList();
